@@ -1,30 +1,63 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <div class="root">
+      <div class="taskAdd">
+        <AppTaskAdd :todos="todos"/>
+      </div>
+      <div class="list">
+        <AppTaskList :todos="todos"/>
+      </div>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 
-import HelloWorld from './components/HelloWorld.vue';
+import AppTaskAdd from '@/components/App-TaskAdd.vue'
+import AppTaskList from '@/components/App-TaskList.vue'
+import {computed} from 'vue'
 
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+const todosLC = computed(() => {
+  const todosLCRaw = localStorage.getItem('todos')
+  let todosLC = []
+  if (todosLCRaw) {
+    todosLC = JSON.parse(todosLCRaw)
   }
-}
+  return todosLC
+})
+
+const todos = { ... todosLC.value }
+
+console.log('AppTodos', todos)
+
 </script>
 
 <style>
+html, body {
+  background-color: #232323;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  //text-align: center;
+  color: #548ee7;
+  //margin-top: 60px;
+}
+.root {
+  //display: flex;
+  margin-top: 80px;
+  justify-content: center;
+  align-items: center;
+}
+.taskAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

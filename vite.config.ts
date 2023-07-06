@@ -1,11 +1,12 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue2'
+import path from 'path'
 
 export default defineConfig({
     plugins: [vue()],
-    server: {
-        open: true,
-        port: 3000,
-        strictPort: true,
-    },
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src')
+        }
+    }
 });
