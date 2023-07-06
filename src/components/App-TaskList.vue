@@ -12,7 +12,5 @@ const props = defineProps({
   todos: Array
 })
 
-console.log('AppTaskListTodos', props.todos)
-
 </script>
 

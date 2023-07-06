@@ -15,7 +15,7 @@
 
 import AppTaskAdd from '@/components/App-TaskAdd.vue'
 import AppTaskList from '@/components/App-TaskList.vue'
-import {computed} from 'vue'
+import {computed, reactive} from 'vue'
 
 const todosLC = computed(() => {
   const todosLCRaw = localStorage.getItem('todos')
@@ -26,9 +26,7 @@ const todosLC = computed(() => {
   return todosLC
 })
 
-const todos = { ... todosLC.value }
-
-console.log('AppTodos', todos)
+const todos = reactive(todosLC.value)
 
 </script>
 

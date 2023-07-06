@@ -10,8 +10,6 @@ const props = defineProps({
   todo: Object
 })
 
-console.log('AppTaskTodo', props.todo)
-
 </script>
 
 <style scoped>

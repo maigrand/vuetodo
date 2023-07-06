@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input v-model="inputData"/>
-    <button @click="createNewTask" @keyup.enter="createNewTask">+</button>
+    <input @keyup.enter="createNewTask" v-model="inputData"/>
+    <button @click="createNewTask">+</button>
   </div>
 </template>
 
@@ -14,8 +14,6 @@ const props = defineProps({
 
 const inputData = ref('')
 
-console.log("AppTaskAddTodos", props.todos)
-
 function createNewTask() {
   props?.todos?.push({ text: inputData.value} )
   const todosLCRaw = localStorage.getItem('todos')
@@ -27,34 +25,6 @@ function createNewTask() {
   localStorage.setItem('todos', JSON.stringify(todosLC))
 }
 
-// export default {
-//   name: 'AppTaskAdd',
-//   props: {
-//     todos: Array
-//   },
-//   setup(props: any) {
-//     const inputData = ref('')
-//
-//     function createNewTask() {
-//       props.todos.push({ text: inputData.value} )
-//     }
-//
-//     return {
-//       inputData,
-//       createNewTask
-//     }
-//   }
-//   // data() {
-//   //   return {
-//   //     inputData: ''
-//   //   }
-//   // },
-//   // methods: {
-//   //   createNewTask() {
-//   //     this.todos.push(this.inputData)
-//   //   }
-//   // }
-// }
 </script>
 
 <style scoped>
