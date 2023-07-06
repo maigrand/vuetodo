@@ -7,6 +7,7 @@
 
 <script lang="ts" setup>
 import {ref} from 'vue'
+import {TaskModel} from '@/types/TaskModel'
 
 const props = defineProps({
   todos: Array
@@ -15,14 +16,24 @@ const props = defineProps({
 const inputData = ref('')
 
 function createNewTask() {
-  props?.todos?.push({ text: inputData.value} )
+
   const todosLCRaw = localStorage.getItem('todos')
-  let todosLC = []
+  let todosLC: TaskModel[] = []
   if (todosLCRaw) {
     todosLC = JSON.parse(todosLCRaw)
   }
-  todosLC.push({ text: inputData.value} )
+
+  const task = {
+    id: todosLC.length + 1,
+    title: inputData.value,
+    completed: false
+  }
+
+  todosLC.push(task)
   localStorage.setItem('todos', JSON.stringify(todosLC))
+
+  props?.todos?.push(task)
+  inputData.value = ''
 }
 
 </script>
