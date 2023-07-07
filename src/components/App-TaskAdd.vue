@@ -11,7 +11,7 @@ import {ref} from 'vue'
 import {TaskModel} from '@/types/TaskModel'
 
 const props = defineProps({
-  todosLength: Number,
+  todosLength: { type: Number, required: true}
 })
 
 const emit = defineEmits<{
@@ -22,7 +22,7 @@ const inputData = ref('')
 
 function createNewTask() {
   emit('add-task', {
-    id: props!.todosLength! + 1,
+    id: props.todosLength + 1,
     title: inputData.value,
     completed: false,
     selected: false,

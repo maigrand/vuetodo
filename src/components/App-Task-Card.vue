@@ -11,7 +11,7 @@ import {ref} from 'vue'
 import {TaskModel} from '@/types/TaskModel'
 
 const props = defineProps({
-  task: Object as () => TaskModel,
+  task: {type: Object as () => TaskModel, required: true},
 })
 
 const emit = defineEmits<{
@@ -19,14 +19,14 @@ const emit = defineEmits<{
   (e: 'title-change', title: string): void,
 }>()
 
-const inputData = ref(props?.task?.title)
+const inputData = ref(props.task.title)
 
 function onClick() {
   emit('set-selected')
 }
 
 function onChange() {
-  emit('title-change', inputData.value ? inputData.value : '')
+  emit('title-change', inputData.value)
 }
 
 </script>

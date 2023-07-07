@@ -12,7 +12,7 @@ import {TaskModel} from '@/types/TaskModel'
 import {computed} from 'vue'
 
 const props = defineProps({
-  todo: Object as () => TaskModel
+  todo: {type: Object as () => TaskModel, required: true}
 })
 
 const emit = defineEmits<{
@@ -21,24 +21,18 @@ const emit = defineEmits<{
   (e: 'set-selected', taskId?: number): void
 }>()
 
-const isChecked = computed(() => props?.todo?.completed)
+const isChecked = computed(() => props.todo.completed)
 
 function setChecked() {
-  if (props?.todo) {
-    emit('set-checked', props?.todo?.id)
-  }
+  emit('set-checked', props.todo.id)
 }
 
 function deleteTodo() {
-  if (props?.todo) {
-    emit('delete-task', props?.todo?.id)
-  }
+  emit('delete-task', props.todo.id)
 }
 
 function setSelected() {
-  if (props?.todo) {
-    emit('set-selected', props?.todo?.id)
-  }
+  emit('set-selected', props.todo.id)
 }
 
 </script>
@@ -49,6 +43,7 @@ function setSelected() {
   justify-content: center;
   align-items: center;
 }
+
 .app-task__wrapper h1 {
   margin-left: 8px;
 }
