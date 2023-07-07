@@ -8,6 +8,7 @@
           :task="selectedTask"
           @set-selected="setSelected"
           @title-change="handleTitleChange"
+          @delete-task="deleteTask"
       />
     </div>
     <div class="app-list-item__wrapper">

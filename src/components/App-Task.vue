@@ -8,7 +8,6 @@
         {{ todo.title }}
       </div>
     </div>
-<!--    <button @click="deleteTodo">X</button>-->
   </div>
 </template>
 
@@ -22,9 +21,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  //(e: 'delete-task', taskId: number): void
   (e: 'set-checked', taskId: number): void
-  (e: 'set-selected', taskId?: number): void
+  (e: 'set-selected', taskId: number): void
 }>()
 
 const isChecked = computed(() => props.todo.completed)
@@ -32,11 +30,6 @@ const isChecked = computed(() => props.todo.completed)
 function setChecked() {
   emit('set-checked', props.todo.id)
 }
-
-//@FIXME: вернуть удаление
-// function deleteTodo() {
-//   emit('delete-task', props.todo.id)
-// }
 
 function setSelected() {
   emit('set-selected', props.todo.id)
