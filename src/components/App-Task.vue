@@ -1,8 +1,14 @@
 <template>
   <div class="app-task__wrapper">
-    <input type="checkbox" :checked="isChecked" @click="setChecked">
-    <div @click="setSelected">{{ todo.title }}</div>
-    <button @click="deleteTodo">X</button>
+    <div class="app-task__input">
+      <input type="checkbox" :checked="isChecked" @click="setChecked">
+    </div>
+    <div class="app-task__title">
+      <div @click="setSelected">
+        {{ todo.title }}
+      </div>
+    </div>
+<!--    <button @click="deleteTodo">X</button>-->
   </div>
 </template>
 
@@ -16,7 +22,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'delete-task', taskId: number): void
+  //(e: 'delete-task', taskId: number): void
   (e: 'set-checked', taskId: number): void
   (e: 'set-selected', taskId?: number): void
 }>()
@@ -27,9 +33,10 @@ function setChecked() {
   emit('set-checked', props.todo.id)
 }
 
-function deleteTodo() {
-  emit('delete-task', props.todo.id)
-}
+//@FIXME: вернуть удаление
+// function deleteTodo() {
+//   emit('delete-task', props.todo.id)
+// }
 
 function setSelected() {
   emit('set-selected', props.todo.id)
@@ -39,12 +46,23 @@ function setSelected() {
 
 <style scoped>
 .app-task__wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+  margin-top: 4px;
+  background-color: #323232;
+  border: 16px solid #323232;
+  border-radius: 4px;
+  width: 600px;
+}
+.app-task__wrapper:first-child {
+  margin: 0;
 }
 
-.app-task__wrapper h1 {
-  margin-left: 8px;
+.app-task__input {
+  align-items: first baseline;
+}
+
+.app-task__title {
+  align-items: center;
 }
 </style>

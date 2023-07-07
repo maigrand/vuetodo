@@ -1,8 +1,5 @@
 <template>
   <div class="app-list__wrapper">
-    <div class="app-task-add__wrapper">
-      <AppTaskAdd :todosLength="todosLength" @add-task="addTask"/>
-    </div>
     <div
         class="app-task-card"
         v-if="selectedTask"
@@ -22,6 +19,9 @@
           @set-checked="setChecked"
           @set-selected="setSelected"
       />
+    </div>
+    <div class="app-task-add__wrapper">
+      <AppTaskAdd :todosLength="todosLength" @add-task="addTask"/>
     </div>
   </div>
 </template>
@@ -90,30 +90,31 @@ function handleTitleChange(title: string) {
 <style scoped>
 
 .app-list__wrapper {
-  display: grid;
-  gap: 8px;
-  margin-top: 80px;
-  justify-content: center;
-  align-items: center;
-}
-
-.app-task-add__wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.app-task-add__wrapper {
+  position: sticky;
+  bottom: 16px;
 }
 
 .app-list-item__wrapper {
-  display: grid;
-  gap: 16px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-task-card {
-  position: absolute;
+  position: fixed;
+  right: 108px;
+  top: 8px;
+  width: 400px;
+  height: 800px;
+  border: 1px solid #323232;
   background-color: #323232;
-  width: 200px;
-  height: 200px;
-  top: 100px;
 }
 
 </style>

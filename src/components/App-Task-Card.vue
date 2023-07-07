@@ -1,5 +1,5 @@
 <template>
-  <div class="app-task-card">
+  <div class="app-task-card__wrapper">
     <input type="text" v-model="inputData" @change="onChange"/>
     <button @click="onClick">X</button>
   </div>
@@ -32,16 +32,13 @@ function onChange() {
 </script>
 
 <style scoped>
-.app-task-card {
-  width: 100%;
-  height: 100%;
-  background-color: #232323;
-  border-radius: 10px;
-  padding: 20px;
-  box-sizing: border-box;
+.app-task-card__wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  margin-top: 4px;
+  background-color: #323232;
+  width: 400px;
 }
 </style>

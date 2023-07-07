@@ -1,7 +1,19 @@
 <template>
-  <div>
-    <input @keyup.enter="createNewTask" v-model="inputData"/>
-    <button @click="createNewTask">+</button>
+  <div class="app-task-add__wrapper">
+    <input
+        class="app-task-add__input"
+        v-if="isInputMode"
+        @keyup.enter="createNewTask"
+        v-model="inputData"
+        placeholder="Write something..."
+    />
+    <button
+        class="app-task-add__button"
+        @click="isInputMode = !isInputMode"
+        v-if="!isInputMode"
+    >
+      Add a task
+    </button>
   </div>
 </template>
 
@@ -19,6 +31,7 @@ const emit = defineEmits<{
 }>()
 
 const inputData = ref('')
+const isInputMode = ref(false)
 
 function createNewTask() {
   emit('add-task', {
@@ -28,10 +41,40 @@ function createNewTask() {
     selected: false,
   })
   inputData.value = ''
+  isInputMode.value = false
 }
 
 </script>
 
 <style scoped>
+
+.app-task-add__wrapper {
+
+}
+
+.app-task-add__input {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background: linear-gradient(to right, #562F84 -50%, #2A5D6A 150%);
+  color: white;
+  transition: border-color 0.25s;
+}
+
+.app-task-add__button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background: linear-gradient(to right, #562F84 -50%, #2A5D6A 150%);
+  cursor: pointer;
+  color: white;
+  transition: border-color 0.25s;
+}
 
 </style>
