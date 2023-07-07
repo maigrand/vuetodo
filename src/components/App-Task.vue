@@ -1,11 +1,13 @@
 <template>
-  <div class="root">
+  <div class="app-task__wrapper">
     <input type="checkbox" :checked="isChecked" @click="setChecked">
-    <h1>{{ todo.title }}</h1>
+    <div @click="setSelected">{{ todo.title }}</div>
+    <button @click="deleteTodo">X</button>
   </div>
 </template>
 
 <script lang="ts" setup>
+
 import {TaskModel} from '@/types/TaskModel'
 import {computed} from 'vue'
 
@@ -13,40 +15,41 @@ const props = defineProps({
   todo: Object as () => TaskModel
 })
 
-const isChecked = computed(() => {
-  return props?.todo?.completed
-})
+const emit = defineEmits<{
+  (e: 'delete-task', taskId: number): void
+  (e: 'set-checked', taskId: number): void
+  (e: 'set-selected', taskId?: number): void
+}>()
+
+const isChecked = computed(() => props?.todo?.completed)
 
 function setChecked() {
-  const todosLCRaw = localStorage.getItem('todos')
-  let todosLC: TaskModel[] = []
-  if (todosLCRaw) {
-    todosLC = JSON.parse(todosLCRaw)
+  if (props?.todo) {
+    emit('set-checked', props?.todo?.id)
   }
+}
 
-  const updatedTodos = todosLC.map((task) => {
-    if (task.id === props?.todo?.id) {
-      props.todo.completed = !task.completed
-      return {
-        ...task,
-        completed: !task.completed
-      }
-    }
-    return task
-  })
+function deleteTodo() {
+  if (props?.todo) {
+    emit('delete-task', props?.todo?.id)
+  }
+}
 
-  localStorage.setItem('todos', JSON.stringify(updatedTodos))
+function setSelected() {
+  if (props?.todo) {
+    emit('set-selected', props?.todo?.id)
+  }
 }
 
 </script>
 
 <style scoped>
-.root {
+.app-task__wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.root h1 {
+.app-task__wrapper h1 {
   margin-left: 8px;
 }
 </style>

@@ -6,33 +6,27 @@
 </template>
 
 <script lang="ts" setup>
+
 import {ref} from 'vue'
 import {TaskModel} from '@/types/TaskModel'
 
 const props = defineProps({
-  todos: Array
+  todosLength: Number,
 })
+
+const emit = defineEmits<{
+  (e: 'add-task', task: TaskModel): void
+}>()
 
 const inputData = ref('')
 
 function createNewTask() {
-
-  const todosLCRaw = localStorage.getItem('todos')
-  let todosLC: TaskModel[] = []
-  if (todosLCRaw) {
-    todosLC = JSON.parse(todosLCRaw)
-  }
-
-  const task = {
-    id: todosLC.length + 1,
+  emit('add-task', {
+    id: props!.todosLength! + 1,
     title: inputData.value,
-    completed: false
-  }
-
-  todosLC.push(task)
-  localStorage.setItem('todos', JSON.stringify(todosLC))
-
-  props?.todos?.push(task)
+    completed: false,
+    selected: false,
+  })
   inputData.value = ''
 }
 
