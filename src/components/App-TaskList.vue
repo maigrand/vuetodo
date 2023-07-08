@@ -28,8 +28,8 @@
 
 <script lang="ts" setup>
 
-import AppTask from '@/components/App-Task.vue';
-import AppTaskAdd from '@/components/App-TaskAdd.vue';
+import AppTask from '@/components/app-task/App-Task.vue';
+import AppTaskAdd from '@/components/app-task-add/App-TaskAdd.vue';
 import AppTaskCard from '@/components/App-Task-Card.vue';
 import { TaskModel } from '@/types/TaskModel';
 import { computed, ref } from 'vue';

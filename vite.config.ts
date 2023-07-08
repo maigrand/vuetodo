@@ -1,5 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue2';
 import path from 'path';
 
 export default defineConfig({
