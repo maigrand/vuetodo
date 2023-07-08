@@ -13,26 +13,25 @@
 
 <script lang="ts" setup>
 
-import {TaskModel} from '@/types/TaskModel'
-import {computed} from 'vue'
+import { TaskModel } from '@/types/TaskModel';
+import { computed } from 'vue';
 
 const props = defineProps({
-  todo: {type: Object as () => TaskModel, required: true}
-})
+  todo: { type: Object as () => TaskModel, required: true },
+});
 
-const emit = defineEmits<{
-  (e: 'set-checked', taskId: number): void
+const emit = defineEmits<{(e: 'set-checked', taskId: number): void
   (e: 'set-selected', taskId: number): void
-}>()
+}>();
 
-const isChecked = computed(() => props.todo.completed)
+const isChecked = computed(() => props.todo.completed);
 
 function setChecked() {
-  emit('set-checked', props.todo.id)
+  emit('set-checked', props.todo.id);
 }
 
 function setSelected() {
-  emit('set-selected', props.todo.id)
+  emit('set-selected', props.todo.id);
 }
 
 </script>

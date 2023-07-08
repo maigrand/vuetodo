@@ -1,42 +1,42 @@
 <template>
   <div class="app-task-card__wrapper">
     <div class="app-task-card__input">
-      <input type="text" v-model="inputData" @change="onChange"/>
-      <button @click="deleteTask">delete</button>
+      <input type="text" v-model="taskData.title" />
+      <button type="button" @click="deleteTask">delete</button>
     </div>
     <div class="app-task-card-button__close">
-      <button @click="closeCard">X</button>
+      <button type="button" @click="closeCard">X</button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 
-import {ref} from 'vue'
-import {TaskModel} from '@/types/TaskModel'
+import { computed } from 'vue';
+import { TaskModel } from '@/types/TaskModel';
 
 const props = defineProps({
-  task: {type: Object as () => TaskModel, required: true},
-})
+  task: { type: Object as () => TaskModel, required: true },
+});
 
-const emit = defineEmits<{
-  (e: 'set-selected'): void,
-  (e: 'title-change', title: string): void,
+const emit = defineEmits<{(e: 'set-selected'): void,
   (e: 'delete-task', taskId: number): void,
-}>()
+  (e: 'update:task', task: TaskModel): void,
+}>();
 
-const inputData = ref(props.task.title)
+const taskData = computed<TaskModel>({
+  get: () => props.task,
+  set: (newValue) => {
+    emit('update:task', newValue);
+  },
+});
 
 function closeCard() {
-  emit('set-selected')
-}
-
-function onChange() {
-  emit('title-change', inputData.value)
+  taskData.value.selected = false;
 }
 
 function deleteTask() {
-  emit('delete-task', props.task.id)
+  emit('delete-task', props.task.id);
 }
 
 </script>
